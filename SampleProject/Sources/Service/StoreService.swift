@@ -12,7 +12,7 @@ import Alamofire
 
 
 protocol StoreServiceType {
-  static func stores(type: StoreType, nearBy locatin: CLLocation, completion: @escaping () -> Void)
+  static func stores(type: StoreType, nearBy locatin: CLLocation, completion: @escaping (ServiceResult<Businesses>) -> Void)
 }
 
 
@@ -30,7 +30,10 @@ final class StoreService {
 
 extension StoreService : StoreServiceType {
   
-  static func stores(type: StoreType, nearBy location: CLLocation, completion: @escaping () -> Void) {
+  static func stores(type: StoreType,
+                     nearBy location: CLLocation,
+                     completion: @escaping (ServiceResult<Businesses>) -> Void)
+  {
     let headers: HTTPHeaders = [
       "Authorization": "Bearer \(accessToken)",
     ]
@@ -42,10 +45,23 @@ extension StoreService : StoreServiceType {
     ]
     
     Alamofire.request(baseURL, method: .get, parameters: parameters, headers: headers)
+      .validate(statusCode: 200..<400)
       .responseJSON { response in
-        debugPrint(response)
-        
-        completion()
+        switch response.result {
+        case .success:
+          do {
+            if let data = response.data {
+              let businesses = try JSONDecoder().decode(Businesses.self, from: data)
+              print(businesses)
+              completion(ServiceResult.success(businesses))
+            }
+          } catch {
+            completion(ServiceResult.failure(ServiceError.JSONParsingError))
+          }
+          
+        case .failure(let error):
+          completion(ServiceResult.failure(error))
+        }
       }
   }
   

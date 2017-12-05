@@ -17,4 +17,5 @@ enum ServiceResult<T> {
 
 enum ServiceError: Error {
   case error
+  case JSONParsingError
 }
