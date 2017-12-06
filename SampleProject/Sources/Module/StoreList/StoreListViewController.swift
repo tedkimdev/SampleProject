@@ -134,6 +134,10 @@ extension StoreListViewController: StoreListViewType {
 extension StoreListViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: false)
+    tableView.beginUpdates()
+    tableView.reloadRows(at: [indexPath], with: .none)
+    tableView.endUpdates()
     self.presenter.didSelectTableViewRowAt(indexPath: indexPath)
   }
   
