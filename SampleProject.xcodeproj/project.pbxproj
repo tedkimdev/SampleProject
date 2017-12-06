@@ -12,6 +12,7 @@
 		BD297C7F1FD79A7700C2233F /* StoreDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD297C7E1FD79A7700C2233F /* StoreDetailCell.swift */; };
 		BD472E281FD7C0460073376C /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD472E271FD7C0460073376C /* StarRatingView.swift */; };
 		BD8298F41FD7820600B7CDBF /* StoreListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8298F31FD7820600B7CDBF /* StoreListCellViewModel.swift */; };
+		BD94CA421FD853CD00AE73CE /* AccessInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD94CA411FD853CD00AE73CE /* AccessInformation.swift */; };
 		BDEC38821FD6F6C700959063 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEC38811FD6F6C700959063 /* AppDelegate.swift */; };
 		BDEC38971FD6F6C700959063 /* SampleProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEC38961FD6F6C700959063 /* SampleProjectTests.swift */; };
 		BDEC38AF1FD6FA3200959063 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDEC38AA1FD6FA3200959063 /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 		BD472E271FD7C0460073376C /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		BD61751046404574300DBFB7 /* Pods_SampleProjectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SampleProjectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD8298F31FD7820600B7CDBF /* StoreListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListCellViewModel.swift; sourceTree = "<group>"; };
+		BD94CA411FD853CD00AE73CE /* AccessInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessInformation.swift; sourceTree = "<group>"; };
 		BDEC387E1FD6F6C700959063 /* SampleProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDEC38811FD6F6C700959063 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BDEC388D1FD6F6C700959063 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				BDEDE7A31FD73BF100A1A0E1 /* Business.swift */,
+				BD94CA411FD853CD00AE73CE /* AccessInformation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				BDEDE7961FD718C600A1A0E1 /* StoreListCell.swift in Sources */,
 				BDEDE7A21FD733F500A1A0E1 /* StoreType.swift in Sources */,
 				BDEDE79A1FD71C7B00A1A0E1 /* StoreService.swift in Sources */,
+				BD94CA421FD853CD00AE73CE /* AccessInformation.swift in Sources */,
 				BD472E281FD7C0460073376C /* StarRatingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
