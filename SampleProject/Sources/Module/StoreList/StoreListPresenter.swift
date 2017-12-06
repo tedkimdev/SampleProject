@@ -6,8 +6,8 @@
 //  Copyright © 2017년 Ted Kim. All rights reserved.
 //
 
-import Foundation
 import CoreLocation
+import Foundation
 
 
 // MARK: - Protocol
@@ -47,30 +47,51 @@ final class StoreListPresenter {
   }
   
   func onViewDidLoad() {
-    guard let title = self.view?.getViewTitle() else { return }
-    self.storeType = StoreType(rawValue: title) ?? StoreType.none
+    guard let title = view?.getViewTitle() else { return }
+    storeType = StoreType(rawValue: title) ?? StoreType.none
     
     let status = CLLocationManager.authorizationStatus()
     if status == .denied || status == .restricted {
-      self.view?.presentAlert(title: "Location Services Disabled", message: "Please enable Location Services in Settings.")
+      view?.presentAlert(
+        title: "Location Services Disabled",
+        message: "Please enable Location Services in Settings."
+      )
     }
     
-    self.reloadData()
+    authorize()
   }
   
   
   // MARK: Action
   
+  private func authorize() {
+    storeService.authorize { [weak self] result in
+      guard let `self` = self else { return }
+      
+      switch result {
+      case .success:
+        self.reloadData()
+        
+      case .failure(let error):
+        DispatchQueue.main.async {
+          self.view?.presentAlert(title: "Autorization Error", message: error.localizedDescription)
+        }
+      }
+    }
+  }
+  
   private func requestStoreList(isRefresh: Bool = false) {
-    guard let location = self.currentLocation else { return }
+    guard let location = currentLocation else { return }
     
     if !isRefresh {
-      self.view?.startLoading()
+      view?.startLoading()
     }
     
-    self.storeService.stores(type: self.storeType,
-                             nearBy: location,
-                             offset: isRefresh ? 0 : self.businesses.count){ [weak self] result in
+    storeService.stores(
+      type: storeType,
+      nearBy: location,
+      offset: isRefresh ? 0 : businesses.count
+    ) { [weak self] result in
       guard let `self` = self else { return }
       DispatchQueue.main.async {
         switch result {
@@ -103,23 +124,23 @@ extension StoreListPresenter: StoreListPresenterType {
   }
   
   func loadNextData() {
-    self.requestStoreList()
+    requestStoreList()
   }
   
   // TableView
   
   func didSelectTableViewRowAt(indexPath: IndexPath) {
-    let presenter = StoreDetailPresenter(business: self.businesses[indexPath.row])
+    let presenter = StoreDetailPresenter(business: businesses[indexPath.row])
     let viewController = StoreDetailViewController.createFromStoryboard(presenter: presenter)
-    self.view?.show(viewController, animated: true)
+    view?.show(viewController, animated: true)
   }
   
   func numberOfRows(in section: Int) -> Int {
-    return self.businesses.count
+    return businesses.count
   }
   
   func configureCell(_ cell: StoreListCellType, at indexPath: IndexPath) {
-    let viewModel = StoreListCellViewModel(model: self.businesses[indexPath.row])
+    let viewModel = StoreListCellViewModel(model: businesses[indexPath.row])
     cell.configure(viewModel: viewModel)
   }
   
@@ -132,11 +153,11 @@ extension StoreListPresenter: LocationServiceDelegate {
   
   func getLocation(currentLocation: CLLocation) {
     self.currentLocation = currentLocation
-    self.requestStoreList(isRefresh: true)
+    requestStoreList(isRefresh: true)
   }
 
   func getLocationDidFailWithError(error: Error) {
-    self.view?.presentAlert(title: "Location Error", message: error.localizedDescription)
+    view?.presentAlert(title: "Location Error", message: error.localizedDescription)
   }
   
 }
