@@ -8,6 +8,13 @@
 
 enum StoreType: String {
   case none = ""
-  case Restaurant = "Restaurant"
-  case GroceryStores = "Grocery Store"
+  case restaurant = "Restaurant"
+  case groceryStores = "Grocery Store"
+}
+
+enum SortType: String {
+  case bestMatch = "best_match"
+  case rating = "rating"
+  case reviewCount = "review_count"
+  case distance = "distance"
 }

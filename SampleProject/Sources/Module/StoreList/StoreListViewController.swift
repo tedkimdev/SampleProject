@@ -13,7 +13,6 @@ import UIKit
 
 protocol StoreListViewType: ViewType {
   func getViewTitle() -> String
-  
   func presentAlert(title: String, message: String)
   
   // Navigation
@@ -32,12 +31,13 @@ final class StoreListViewController: BaseViewController {
   // MARK: Properties
   
   private var presenter: StoreListPresenterType
+  private var isLoading: Bool = false
   
   
   // MARK: UI
   
   @IBOutlet weak var tableView: UITableView!
-  private let indicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+  private let indicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
   
   
   // MARK: Initializing
@@ -71,6 +71,8 @@ final class StoreListViewController: BaseViewController {
     
     self.tableView.refreshControl = UIRefreshControl()
     
+    self.indicatorView.layer.cornerRadius = self.indicatorView.bounds.width / 2
+    self.indicatorView.backgroundColor = .black
     self.indicatorView.center = self.view.center
     
     self.view.addSubview(self.indicatorView)
@@ -119,12 +121,13 @@ extension StoreListViewController: StoreListViewType {
   // Networking
   
   func startLoading() {
-    if !self.tableView.refreshControl!.isRefreshing {
-      self.indicatorView.startAnimating()
-    }
+    guard !self.isLoading else { return }
+    self.isLoading = true
+    self.indicatorView.startAnimating()
   }
   
   func stopLoading() {
+    self.isLoading = false
     self.indicatorView.stopAnimating()
     self.tableView.refreshControl?.endRefreshing()
     tableView.reloadData()
@@ -143,6 +146,21 @@ extension StoreListViewController: UITableViewDelegate {
     tableView.reloadRows(at: [indexPath], with: .none)
     tableView.endUpdates()
     self.presenter.didSelectTableViewRowAt(indexPath: indexPath)
+  }
+  
+  // MARK: ScrollView
+  
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    guard !self.isLoading else { return }
+    
+    let scrollBottom = scrollView.contentOffset.y + scrollView.bounds.height
+    let scrollHeight = scrollView.contentSize.height
+    
+    if scrollBottom >= (scrollHeight - 200) && scrollView.contentSize.height > 0 {
+      self.startLoading()
+      self.presenter.loadNextData()
+    }
+    
   }
   
 }

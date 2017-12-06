@@ -8,9 +8,11 @@
 
 import UIKit
 
+
 protocol StoreListCellType {
   func configure(viewModel: StoreListCellViewModel)
 }
+
 
 final class StoreListCell: UITableViewCell, StoreListCellType {
   
