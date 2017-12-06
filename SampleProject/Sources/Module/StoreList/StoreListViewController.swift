@@ -14,6 +14,7 @@ import UIKit
 protocol StoreListViewType: ViewType {
   func getViewTitle() -> String
   func presentAlert(title: String, message: String)
+  func openSettingsAlert(title: String, message: String)
   
   // Navigation
   func show(_ viewController: UIViewController, animated: Bool)
@@ -112,9 +113,38 @@ extension StoreListViewController: StoreListViewType {
   
   func presentAlert(title: String, message: String) {
     let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    
     let action = UIAlertAction(title: "OK", style: .default, handler: nil)
     alertController.addAction(action)
-    present(alertController, animated: true, completion: nil)
+    
+    let reloadAction = UIAlertAction(title: "Reload", style: .default) { _ in
+      self.didPullToRefresh()
+    }
+    alertController.addAction(reloadAction)
+    
+    present(alertController, animated: true)
+  }
+  
+  func openSettingsAlert(title: String, message: String) {
+    let alertController = UIAlertController(
+      title: title,
+      message: message,
+      preferredStyle: .alert)
+    
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+    alertController.addAction(cancelAction)
+    
+    let openAction = UIAlertAction(title: "Open Settings", style: .default) { _ in
+      if let url = URL(string: UIApplicationOpenSettingsURLString) {
+        UIApplication.shared.open(url, options: [:])
+      }
+    }
+    alertController.addAction(openAction)
+    
+    present(alertController, animated: true) { [weak self] in
+      guard let `self` = self else { return }
+      self.stopLoading()
+    }
   }
   
   // Navigation

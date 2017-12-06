@@ -52,7 +52,7 @@ final class StoreListPresenter {
     
     let status = CLLocationManager.authorizationStatus()
     if status == .denied || status == .restricted {
-      view?.presentAlert(
+      view?.openSettingsAlert(
         title: "Location Services Disabled",
         message: "Please enable Location Services in Settings."
       )
@@ -157,7 +157,21 @@ extension StoreListPresenter: LocationServiceDelegate {
   }
 
   func getLocationDidFailWithError(error: Error) {
-    view?.presentAlert(title: "Location Error", message: error.localizedDescription)
+    let status = CLLocationManager.authorizationStatus()
+    DispatchQueue.main.async { [weak self] in
+      guard let `self` = self else { return }
+      if status == .denied || status == .restricted {
+        self.view?.openSettingsAlert(
+          title: "Location Access Denied",
+          message: "Please enable Location Services in Settings."
+        )
+      } else {
+        self.view?.presentAlert(
+          title: "Location Error",
+          message: error.localizedDescription
+        )
+      }
+    }
   }
   
 }
