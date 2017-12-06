@@ -12,7 +12,7 @@ import Alamofire
 
 
 protocol StoreServiceType {
-  static func stores(type: StoreType, nearBy locatin: CLLocation, completion: @escaping (ServiceResult<Businesses>) -> Void)
+  func stores(type: StoreType, nearBy locatin: CLLocation, completion: @escaping (ServiceResult<Businesses>) -> Void)
 }
 
 
@@ -30,12 +30,12 @@ final class StoreService {
 
 extension StoreService : StoreServiceType {
   
-  static func stores(type: StoreType,
+  func stores(type: StoreType,
                      nearBy location: CLLocation,
                      completion: @escaping (ServiceResult<Businesses>) -> Void)
   {
     let headers: HTTPHeaders = [
-      "Authorization": "Bearer \(accessToken)",
+      "Authorization": "Bearer \(StoreService.accessToken)",
     ]
 
     let parameters: Parameters = [
@@ -44,7 +44,7 @@ extension StoreService : StoreServiceType {
       "longitude": location.coordinate.longitude,
     ]
     
-    Alamofire.request(baseURL, method: .get, parameters: parameters, headers: headers)
+    Alamofire.request(StoreService.baseURL, method: .get, parameters: parameters, headers: headers)
       .validate(statusCode: 200..<400)
       .responseJSON { response in
         switch response.result {

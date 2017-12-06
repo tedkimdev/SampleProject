@@ -7,6 +7,7 @@
 //
 
 enum StoreType: String {
+  case none = ""
   case Restaurant = "Restaurant"
-  case GroceryStores = "Grocery Stores"
+  case GroceryStores = "Grocery Store"
 }
