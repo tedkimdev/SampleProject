@@ -21,7 +21,6 @@ final class StoreListCell: UITableViewCell, StoreListCellType {
   @IBOutlet weak var locationLabel: UILabel!
   @IBOutlet weak var phoneLabel: UILabel!
   
-  @IBOutlet weak var locationHeight: NSLayoutConstraint!
   
   // MARK: Initializing
   
@@ -33,30 +32,41 @@ final class StoreListCell: UITableViewCell, StoreListCellType {
     super.init(coder: aDecoder)
   }
   
+  override func awakeFromNib() {
+    self.setupUI()
+  }
   
-  // MARK: Layout
-  
-  override func layoutIfNeeded() {
-    super.layoutIfNeeded()
-    
+  private func setupUI() {
     self.photoView.contentMode = .scaleAspectFill
     self.photoView.layer.cornerRadius = self.photoView.frame.width / 2
     self.photoView.layer.masksToBounds = true
   }
   
   
+  // MARK: Layout
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    self.locationLabel.sizeToFit()
+    self.locationLabel.baselineAdjustment = .alignCenters
+  }
+
+  
   // MARK: Configuring
   
   func configure(viewModel: StoreListCellViewModel) {
+    
     if !viewModel.imageURL.isEmpty {
       self.photoView.kf.setImage(with: URL(string: viewModel.imageURL))
     }
     
     self.nameLabel?.text = viewModel.name
     self.locationLabel?.text = viewModel.location
+    self.locationLabel.baselineAdjustment = .alignCenters
     self.phoneLabel?.text = viewModel.displayPhone
     
-    self.layoutIfNeeded()
+    self.setNeedsLayout()
   }
   
 }
