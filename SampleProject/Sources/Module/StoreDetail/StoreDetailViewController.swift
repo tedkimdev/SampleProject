@@ -20,6 +20,13 @@ protocol StoreDetailViewType: ViewType {
 
 final class StoreDetailViewController: BaseViewController {
   
+  // MARK: Constants
+  
+  fileprivate struct Metric {
+    static let navigationBarHeight: CGFloat = 40.0
+  }
+  
+  
   // MARK: Properties
   
   private var presenter: StoreDetailPresenterType
@@ -52,6 +59,11 @@ final class StoreDetailViewController: BaseViewController {
     self.presenter.onViewDidLoad()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    self.tabBarController?.tabBar.isHidden = true
+  }
+  
   
   // MARK: Class Function
   
@@ -67,7 +79,6 @@ final class StoreDetailViewController: BaseViewController {
   }
  
   override func setupUI() {
-    print("setupUI")
   }
   
   override func setupBinding() {
@@ -84,15 +95,16 @@ extension StoreDetailViewController: StoreDetailViewType {
   func setTitle(title: String) {
     self.title = title
   }
-  
-  
 }
 
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension StoreDetailViewController: UICollectionViewDelegateFlowLayout {
-  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    let height = UIScreen.main.bounds.height - Metric.navigationBarHeight
+    return CGSize(width: UIScreen.main.bounds.width, height: height)
+  }
 }
 
 

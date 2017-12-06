@@ -62,6 +62,10 @@ final class StoreListViewController: BaseViewController {
     self.presenter.onViewDidLoad()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    self.tabBarController?.tabBar.isHidden = false
+  }
+  
   override func setupUI() {
     self.title = self.navigationController?.tabBarItem.title
     

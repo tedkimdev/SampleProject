@@ -64,7 +64,10 @@ final class StoreListCell: UITableViewCell, StoreListCellType {
     self.nameLabel?.text = viewModel.name
     self.locationLabel?.text = viewModel.location
     self.locationLabel.baselineAdjustment = .alignCenters
-    self.phoneLabel?.text = viewModel.displayPhone
+    
+    if !viewModel.displayPhone.isEmpty {
+      self.phoneLabel?.text = viewModel.displayPhone
+    }
     
     self.setNeedsLayout()
   }
