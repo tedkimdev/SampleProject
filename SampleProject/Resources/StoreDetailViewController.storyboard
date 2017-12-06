@@ -52,8 +52,19 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="i1U-Wa-xyY" customClass="StarRatingView" customModule="SampleProject" customModuleProvider="target">
+                                                    <rect key="frame" x="89" y="319.5" width="196" height="32"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="size" keyPath="starSize">
+                                                            <size key="value" width="32" height="32"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="starCount">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review Count : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="buC-aO-Dkf">
-                                                    <rect key="frame" x="88" y="367.5" width="200" height="20"/>
+                                                    <rect key="frame" x="88" y="363.5" width="200" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="WZ0-b6-G96"/>
                                                         <constraint firstAttribute="width" constant="200" id="w6v-Fp-wL3"/>
@@ -63,7 +74,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Is it open ? " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKk-eb-jns">
-                                                    <rect key="frame" x="87.5" y="399.5" width="200" height="20"/>
+                                                    <rect key="frame" x="87.5" y="395.5" width="200" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="4eB-B9-CUL"/>
                                                         <constraint firstAttribute="width" constant="200" id="CpD-lu-f0F"/>
@@ -73,7 +84,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bal-e4-a3v">
-                                                    <rect key="frame" x="77" y="439.5" width="220" height="30"/>
+                                                    <rect key="frame" x="77" y="435.5" width="220" height="30"/>
                                                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="3pC-4s-LpR"/>
@@ -92,7 +103,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-comment" translatesAutoresizingMaskIntoConstraints="NO" id="C1I-b0-OVL">
-                                                    <rect key="frame" x="50" y="367.5" width="20" height="20"/>
+                                                    <rect key="frame" x="50" y="363.5" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="0x1-zs-gXD"/>
                                                         <constraint firstAttribute="width" constant="20" id="zb4-YX-MhS"/>
@@ -115,27 +126,18 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wi5-3c-B7y">
-                                                    <rect key="frame" x="87" y="319.5" width="200" height="36"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="36" id="EoB-eY-c9u"/>
-                                                        <constraint firstAttribute="width" constant="200" id="fu0-n9-Kln"/>
-                                                    </constraints>
-                                                </view>
                                             </subviews>
                                         </view>
                                         <constraints>
+                                            <constraint firstItem="i1U-Wa-xyY" firstAttribute="centerX" secondItem="CwG-mv-bUE" secondAttribute="centerX" id="00e-49-HJH"/>
                                             <constraint firstItem="GKk-eb-jns" firstAttribute="centerX" secondItem="CwG-mv-bUE" secondAttribute="centerX" id="9He-T7-ilM"/>
                                             <constraint firstItem="JXd-7V-gGk" firstAttribute="top" secondItem="Cpy-Fw-2VH" secondAttribute="bottom" constant="8" id="9kd-dO-F0U"/>
                                             <constraint firstItem="gpF-zQ-g3x" firstAttribute="centerX" secondItem="CwG-mv-bUE" secondAttribute="centerX" id="Cb9-JG-Z1i"/>
                                             <constraint firstItem="bal-e4-a3v" firstAttribute="centerX" secondItem="CwG-mv-bUE" secondAttribute="centerX" id="Fvf-3k-ei2"/>
                                             <constraint firstItem="buC-aO-Dkf" firstAttribute="leading" secondItem="C1I-b0-OVL" secondAttribute="trailing" constant="18" id="H6c-TC-C4A"/>
                                             <constraint firstItem="gpF-zQ-g3x" firstAttribute="leading" secondItem="pkb-GT-0CM" secondAttribute="trailing" constant="8" id="JZz-16-RRR"/>
-                                            <constraint firstItem="buC-aO-Dkf" firstAttribute="top" secondItem="Wi5-3c-B7y" secondAttribute="bottom" constant="12" id="JfH-e1-5cD"/>
-                                            <constraint firstItem="Wi5-3c-B7y" firstAttribute="centerX" secondItem="CwG-mv-bUE" secondAttribute="centerX" id="KaH-kJ-fqc"/>
+                                            <constraint firstItem="i1U-Wa-xyY" firstAttribute="top" secondItem="gpF-zQ-g3x" secondAttribute="bottom" constant="12" id="Jup-fJ-y51"/>
                                             <constraint firstItem="bal-e4-a3v" firstAttribute="top" secondItem="GKk-eb-jns" secondAttribute="bottom" constant="20" id="Lzz-su-KSQ"/>
-                                            <constraint firstItem="Wi5-3c-B7y" firstAttribute="top" secondItem="gpF-zQ-g3x" secondAttribute="bottom" constant="12" id="Mfv-We-qyW"/>
                                             <constraint firstItem="C1I-b0-OVL" firstAttribute="centerY" secondItem="buC-aO-Dkf" secondAttribute="centerY" id="NGY-eH-ta0"/>
                                             <constraint firstItem="gpF-zQ-g3x" firstAttribute="top" secondItem="JXd-7V-gGk" secondAttribute="bottom" constant="12" id="Nao-0F-VBW"/>
                                             <constraint firstItem="JXd-7V-gGk" firstAttribute="leading" secondItem="t6K-lc-n3a" secondAttribute="trailing" constant="8" id="U08-LZ-so6"/>
@@ -144,6 +146,7 @@
                                             <constraint firstItem="buC-aO-Dkf" firstAttribute="centerX" secondItem="CwG-mv-bUE" secondAttribute="centerX" id="hWG-GF-Cd3"/>
                                             <constraint firstItem="GKk-eb-jns" firstAttribute="top" secondItem="buC-aO-Dkf" secondAttribute="bottom" constant="12" id="htl-dk-1cj"/>
                                             <constraint firstItem="t6K-lc-n3a" firstAttribute="centerY" secondItem="JXd-7V-gGk" secondAttribute="centerY" id="jjm-yJ-Pfi"/>
+                                            <constraint firstItem="buC-aO-Dkf" firstAttribute="top" secondItem="i1U-Wa-xyY" secondAttribute="bottom" constant="12" id="ukB-qw-zRv"/>
                                             <constraint firstItem="Cpy-Fw-2VH" firstAttribute="centerX" secondItem="CwG-mv-bUE" secondAttribute="centerX" id="v9a-mE-rLu"/>
                                             <constraint firstItem="JXd-7V-gGk" firstAttribute="centerX" secondItem="CwG-mv-bUE" secondAttribute="centerX" id="wfe-ab-zHi"/>
                                         </constraints>
@@ -153,6 +156,7 @@
                                             <outlet property="locatinLabel" destination="JXd-7V-gGk" id="itZ-gg-eJJ"/>
                                             <outlet property="phoneLabel" destination="gpF-zQ-g3x" id="Swn-yQ-jqr"/>
                                             <outlet property="reviewCountLabel" destination="buC-aO-Dkf" id="kMz-rD-J6b"/>
+                                            <outlet property="starRatingView" destination="i1U-Wa-xyY" id="RxP-Oi-eTh"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

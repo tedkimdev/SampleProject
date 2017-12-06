@@ -21,6 +21,7 @@ final class StoreDetailCell: UICollectionViewCell, StoreDetailCellType {
   @IBOutlet weak var phoneLabel: UILabel!
   @IBOutlet weak var reviewCountLabel: UILabel!
   @IBOutlet weak var isOpenLabel: UILabel!
+  @IBOutlet weak var starRatingView: StarRatingView!
   
   
   // MARK: Initializing
@@ -54,6 +55,7 @@ final class StoreDetailCell: UICollectionViewCell, StoreDetailCellType {
     
     self.locatinLabel.text = model.location
     self.phoneLabel.text = model.displayPhone
+    self.starRatingView.rating = model.rating
     
     let formatter = NumberFormatter()
     formatter.numberStyle = .decimal
