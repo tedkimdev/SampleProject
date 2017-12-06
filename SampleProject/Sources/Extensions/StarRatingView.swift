@@ -16,21 +16,21 @@ final class StarRatingView: UIStackView {
   
   private var starViews = [UIImageView]()
   
-  @IBInspectable var starSize: CGSize = CGSize(width: 36.0, height: 36.0) {
+  @IBInspectable var starSize = CGSize(width: 30.0, height: 30.0) {
     didSet {
-      self.setupStarViews()
+      setupStarViews()
     }
   }
   
-  @IBInspectable var starCount: Int = 5 {
+  @IBInspectable var starCount = 5 {
     didSet {
-      self.setupStarViews()
+      setupStarViews()
     }
   }
   
   var rating: Float = 0 {
     didSet {
-      self.setupStarViews()
+      setupStarViews()
     }
   }
   
@@ -39,30 +39,40 @@ final class StarRatingView: UIStackView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    self.setupStarViews()
+    setupStarViews()
   }
   
   required init(coder: NSCoder) {
     super.init(coder: coder)
-    self.setupStarViews()
+    setupStarViews()
   }
   
   private func setupStarViews() {
-    self.removeStarViews()
+    removeStarViews()
     
     // load images
     let bundle = Bundle(for: type(of: self))
-    let filledStarImage = UIImage(named: "icon-star-filled", in: bundle, compatibleWith: self.traitCollection)
-    let emptyStarImage = UIImage(named: "icon-star-empty", in: bundle, compatibleWith: self.traitCollection)
-    let halfStarImage = UIImage(named: "icon-star-half", in: bundle, compatibleWith: self.traitCollection)
+    let filledStarImage = UIImage(
+      named: "icon-star-filled",
+      in: bundle,
+      compatibleWith: traitCollection
+    )
+    let emptyStarImage = UIImage(
+      named: "icon-star-empty",
+      in: bundle,
+      compatibleWith: self.traitCollection
+    )
+    let halfStarImage = UIImage(
+      named: "icon-star-half",
+      in: bundle,
+      compatibleWith: self.traitCollection
+    )
     
     var rating = self.rating
-    for _ in 0..<self.starCount {
+    for _ in 0..<starCount {
       let imageView = UIImageView()
       
-      if rating > 1 {
-        imageView.image = filledStarImage
-      } else if rating >= 0.75 {
+      if rating >= 0.75 {
         imageView.image = filledStarImage
       } else if rating >= 0.25 {
         imageView.image = halfStarImage
@@ -73,20 +83,20 @@ final class StarRatingView: UIStackView {
       
       // Add constrainsts
       imageView.translatesAutoresizingMaskIntoConstraints = false
-      imageView.heightAnchor.constraint(equalToConstant: self.starSize.height).isActive = true
-      imageView.widthAnchor.constraint(equalToConstant: self.starSize.width).isActive = true
+      imageView.heightAnchor.constraint(equalToConstant: starSize.height).isActive = true
+      imageView.widthAnchor.constraint(equalToConstant: starSize.width).isActive = true
       
-      self.addArrangedSubview(imageView)
-      self.starViews.append(imageView)
+      addArrangedSubview(imageView)
+      starViews.append(imageView)
     }
   }
   
   private func removeStarViews() {
     for view in self.starViews {
-      self.removeArrangedSubview(view)
+      removeArrangedSubview(view)
       view.removeFromSuperview()
     }
-    self.starViews.removeAll()
+    starViews.removeAll()
   }
 
 }

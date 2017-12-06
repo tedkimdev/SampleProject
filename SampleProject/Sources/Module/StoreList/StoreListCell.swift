@@ -9,10 +9,14 @@
 import UIKit
 
 
+// MARK: - Protocol
+
 protocol StoreListCellType {
   func configure(viewModel: StoreListCellViewModel)
 }
 
+
+// MARK: - Class Implementation
 
 final class StoreListCell: UITableViewCell, StoreListCellType {
   
@@ -23,25 +27,14 @@ final class StoreListCell: UITableViewCell, StoreListCellType {
   @IBOutlet weak var locationLabel: UILabel!
   @IBOutlet weak var phoneLabel: UILabel!
   
-  
-  // MARK: Initializing
-  
-  override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-    super.init(style: style, reuseIdentifier: reuseIdentifier)
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-  }
-  
   override func awakeFromNib() {
-    self.setupUI()
+    setupUI()
   }
   
   private func setupUI() {
-    self.photoView.contentMode = .scaleAspectFill
-    self.photoView.layer.cornerRadius = self.photoView.frame.width / 2
-    self.photoView.layer.masksToBounds = true
+    photoView.contentMode = .scaleAspectFill
+    photoView.layer.cornerRadius = self.photoView.frame.width / 2
+    photoView.layer.masksToBounds = true
   }
   
   
@@ -50,8 +43,8 @@ final class StoreListCell: UITableViewCell, StoreListCellType {
   override func layoutSubviews() {
     super.layoutSubviews()
     
-    self.locationLabel.sizeToFit()
-    self.locationLabel.baselineAdjustment = .alignCenters
+    locationLabel.sizeToFit()
+    locationLabel.baselineAdjustment = .alignCenters
   }
 
   
@@ -60,18 +53,18 @@ final class StoreListCell: UITableViewCell, StoreListCellType {
   func configure(viewModel: StoreListCellViewModel) {
     
     if !viewModel.imageURL.isEmpty {
-      self.photoView.kf.setImage(with: URL(string: viewModel.imageURL))
+      photoView.kf.setImage(with: URL(string: viewModel.imageURL))
     }
     
-    self.nameLabel?.text = viewModel.name
-    self.locationLabel?.text = viewModel.location
-    self.locationLabel.baselineAdjustment = .alignCenters
+    nameLabel?.text = viewModel.name
+    locationLabel?.text = viewModel.location
+    locationLabel.baselineAdjustment = .alignCenters
     
     if !viewModel.displayPhone.isEmpty {
-      self.phoneLabel?.text = viewModel.displayPhone
+      phoneLabel?.text = viewModel.displayPhone
     }
     
-    self.setNeedsLayout()
+    setNeedsLayout()
   }
   
 }

@@ -31,7 +31,7 @@ final class StoreListViewController: BaseViewController {
   // MARK: Properties
   
   private var presenter: StoreListPresenterType
-  private var isLoading: Bool = false
+  private var isLoading = false
   
   
   // MARK: UI
@@ -59,36 +59,41 @@ final class StoreListViewController: BaseViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.presenter.onViewDidLoad()
+    presenter.onViewDidLoad()
   }
   
   override func viewWillAppear(_ animated: Bool) {
-    self.tabBarController?.tabBar.isHidden = false
+    super.viewWillAppear(animated)
+    tabBarController?.tabBar.isHidden = false
   }
   
   override func setupUI() {
-    self.title = self.navigationController?.tabBarItem.title
+    title = navigationController?.tabBarItem.title
     
-    self.tableView.refreshControl = UIRefreshControl()
+    tableView.refreshControl = UIRefreshControl()
     
-    self.indicatorView.layer.cornerRadius = self.indicatorView.bounds.width / 2
-    self.indicatorView.backgroundColor = .black
-    self.indicatorView.center = self.view.center
+    indicatorView.layer.cornerRadius = self.indicatorView.bounds.width / 4
+    indicatorView.backgroundColor = .black
+    indicatorView.center = self.view.center
     
-    self.view.addSubview(self.indicatorView)
+    view.addSubview(self.indicatorView)
   }
   
   override func setupBinding() {
-    self.tableView.delegate = self
-    self.tableView.dataSource = self
-    self.tableView.refreshControl?.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
+    tableView.delegate = self
+    tableView.dataSource = self
+    tableView.refreshControl?.addTarget(
+      self,
+      action: #selector(didPullToRefresh),
+      for: .valueChanged
+    )
   }
   
   
   // MARK: Target Action
   
   @objc func didPullToRefresh() {
-    self.presenter.reloadData()
+    presenter.reloadData()
   }
   
 }
@@ -109,27 +114,27 @@ extension StoreListViewController: StoreListViewType {
     let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
     let action = UIAlertAction(title: "OK", style: .default, handler: nil)
     alertController.addAction(action)
-    self.present(alertController, animated: true, completion: nil)
+    present(alertController, animated: true, completion: nil)
   }
   
   // Navigation
   
   func show(_ viewController: UIViewController, animated: Bool) {
-    self.navigationController?.pushViewController(viewController, animated: true)
+    navigationController?.pushViewController(viewController, animated: true)
   }
 
   // Networking
   
   func startLoading() {
-    guard !self.isLoading else { return }
-    self.isLoading = true
-    self.indicatorView.startAnimating()
+    guard !isLoading else { return }
+    isLoading = true
+    indicatorView.startAnimating()
   }
   
   func stopLoading() {
-    self.isLoading = false
-    self.indicatorView.stopAnimating()
-    self.tableView.refreshControl?.endRefreshing()
+    isLoading = false
+    indicatorView.stopAnimating()
+    tableView.refreshControl?.endRefreshing()
     tableView.reloadData()
   }
   
@@ -145,20 +150,20 @@ extension StoreListViewController: UITableViewDelegate {
     tableView.beginUpdates()
     tableView.reloadRows(at: [indexPath], with: .none)
     tableView.endUpdates()
-    self.presenter.didSelectTableViewRowAt(indexPath: indexPath)
+    presenter.didSelectTableViewRowAt(indexPath: indexPath)
   }
   
   // MARK: ScrollView
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    guard !self.isLoading else { return }
+    guard !isLoading else { return }
     
     let scrollBottom = scrollView.contentOffset.y + scrollView.bounds.height
     let scrollHeight = scrollView.contentSize.height
     
     if scrollBottom >= (scrollHeight - 200) && scrollView.contentSize.height > 0 {
-      self.startLoading()
-      self.presenter.loadNextData()
+      startLoading()
+      presenter.loadNextData()
     }
     
   }
@@ -171,12 +176,12 @@ extension StoreListViewController: UITableViewDelegate {
 extension StoreListViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return self.presenter.numberOfRows(in: section)
+    return presenter.numberOfRows(in: section)
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "StoreListCell", for: indexPath) as! StoreListCell
-    self.presenter.configureCell(cell, at: indexPath)
+    presenter.configureCell(cell, at: indexPath)
     return cell
   }
   

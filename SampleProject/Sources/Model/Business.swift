@@ -9,7 +9,7 @@
 import Foundation
 
 
-// MARK: Business
+// MARK: - Business
 
 struct Business: Decodable {
   
@@ -64,7 +64,7 @@ extension Business {
 }
 
 
-// MARK: Businesses
+// MARK: - Businesses
 
 struct Businesses: Decodable {
   let items: [Business]
@@ -77,7 +77,7 @@ struct Businesses: Decodable {
 }
 
 
-// MARK: Location
+// MARK: - Location
 
 struct BusinessLocation: Decodable {
   let address: [String]

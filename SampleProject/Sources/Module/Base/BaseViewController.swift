@@ -19,8 +19,8 @@ class BaseViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.setupUI()
-    self.setupBinding()
+    setupUI()
+    setupBinding()
   }
   
   func setupUI() {

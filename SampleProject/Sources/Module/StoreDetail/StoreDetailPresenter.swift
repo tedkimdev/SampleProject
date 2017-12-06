@@ -37,7 +37,7 @@ final class StoreDetailPresenter {
   }
   
   func onViewDidLoad() {
-    self.view?.setTitle(title: self.business?.name ?? "")
+    view?.setTitle(title: self.business?.name ?? "")
   }
   
 }
@@ -48,11 +48,11 @@ final class StoreDetailPresenter {
 extension StoreDetailPresenter: StoreDetailPresenterType {
   
   func numberOfRows(in section: Int) -> Int {
-    return self.business != nil ? 1 : 0
+    return business != nil ? 1 : 0
   }
   
   func configureCell(_ cell: StoreDetailCellType, at indexPath: IndexPath) {
-    guard let business = self.business else { return }
+    guard let business = business else { return }
     cell.configure(model: business)
   }
   

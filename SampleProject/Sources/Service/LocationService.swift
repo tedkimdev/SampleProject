@@ -6,15 +6,19 @@
 //  Copyright © 2017년 Ted Kim. All rights reserved.
 //
 
-import Foundation
 import CoreLocation
+import Foundation
 
+
+// MARK: - Protocol
 
 protocol LocationServiceDelegate {
   func getLocation(currentLocation: CLLocation)
   func getLocationDidFailWithError(error: Error)
 }
 
+
+// MARK: - Class Implementation
 
 final class LocationService: NSObject {
   
@@ -35,24 +39,24 @@ final class LocationService: NSObject {
   // MARK: Functions
   
   func authorize() {
-    self.locationManager.requestWhenInUseAuthorization()
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    self.locationManager.delegate = self
+    locationManager.requestWhenInUseAuthorization()
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    locationManager.delegate = self
   }
   
   func requestLocation() {
-    self.shouldSetRegion = true
-    self.lastLocation = nil
+    shouldSetRegion = true
+    lastLocation = nil
     
-    self.locationManager.requestLocation()
+    locationManager.requestLocation()
   }
   
   private func updateLocation(currentLocation: CLLocation){
-    self.delegate?.getLocation(currentLocation: currentLocation)
+    delegate?.getLocation(currentLocation: currentLocation)
   }
   
   private func updateLocationDidFailWithError(error: Error) {
-    self.delegate?.getLocationDidFailWithError(error: error)
+    delegate?.getLocationDidFailWithError(error: error)
   }
   
 }
@@ -64,15 +68,15 @@ extension LocationService: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     guard let currentLocation = locations.first,
-      self.shouldSetRegion else { return }
+      shouldSetRegion else { return }
   
-    self.shouldSetRegion = false
-    self.lastLocation = currentLocation
-    self.updateLocation(currentLocation: currentLocation)
+    shouldSetRegion = false
+    lastLocation = currentLocation
+    updateLocation(currentLocation: currentLocation)
   }
   
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-    self.updateLocationDidFailWithError(error: error)
+    updateLocationDidFailWithError(error: error)
   }
   
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 struct StoreListCellViewModel {
   
   let id: String
