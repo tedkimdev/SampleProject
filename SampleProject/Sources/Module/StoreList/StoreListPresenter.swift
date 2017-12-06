@@ -89,7 +89,9 @@ extension StoreListPresenter: StoreListPresenterType {
   // TableView
   
   func didSelectTableViewRowAt(indexPath: IndexPath) {
-    print("didSelectTableViewRowAt")
+    let presenter = StoreDetailPresenter(business: self.businesses[indexPath.row])
+    let viewController = StoreDetailViewController.createFromStoryboard(presenter: presenter)
+    self.view?.show(viewController, animated: true)
   }
   
   func numberOfRows(in section: Int) -> Int {
