@@ -6,6 +6,7 @@
 //  Copyright © 2017년 Ted Kim. All rights reserved.
 //
 
+import SafariServices
 import UIKit
 
 
@@ -92,19 +93,23 @@ final class StoreDetailViewController: BaseViewController {
 // MARK: - StoreDetailViewType
 
 extension StoreDetailViewController: StoreDetailViewType {
+  
   func setTitle(title: String) {
     self.title = title
   }
+  
 }
 
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension StoreDetailViewController: UICollectionViewDelegateFlowLayout {
+  
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let height = UIScreen.main.bounds.height - Metric.navigationBarHeight
     return CGSize(width: UIScreen.main.bounds.width, height: height)
   }
+  
 }
 
 
@@ -118,8 +123,22 @@ extension StoreDetailViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoreDetailCell", for: indexPath) as! StoreDetailCell
+    cell.delegate = self
     self.presenter.configureCell(cell, at: indexPath)
     return cell
+  }
+  
+}
+
+
+// MARK: - StoreDetailCellDelegate
+
+extension StoreDetailViewController: StoreDetailCellDelegate {
+  
+  func goToReservation(by urlString: String?) {
+    guard let urlString = urlString else { return }
+    let safariViewController = SFSafariViewController(url: URL(string: urlString)!)
+    self.present(safariViewController, animated: true, completion: nil)
   }
   
 }

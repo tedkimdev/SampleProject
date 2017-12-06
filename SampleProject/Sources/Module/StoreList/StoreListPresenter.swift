@@ -16,6 +16,7 @@ protocol StoreListPresenterType: class, PresenterType {
   weak var view: StoreListViewType? { get set }
   
   func reloadData()
+  func loadNextData()
   
   // TableView
   func didSelectTableViewRowAt(indexPath: IndexPath)
@@ -55,15 +56,25 @@ final class StoreListPresenter {
   
   // MARK: Action
   
-  private func requestStoreList() {
+  private func requestStoreList(isRefresh: Bool = false) {
     guard let location = self.currentLocation else { return }
     
-    self.view?.startLoading()
-    self.storeService.stores(type: self.storeType, nearBy: location) { result in
+    if !isRefresh {
+      self.view?.startLoading()
+    }
+    
+    self.storeService.stores(type: self.storeType,
+                             nearBy: location,
+                             offset: isRefresh ? 0 : self.businesses.count){ [weak self] result in
+      guard let `self` = self else { return }
       DispatchQueue.main.async {
         switch result {
         case .success(let businesses):
-          self.businesses = businesses.items
+          if self.businesses.count == 0 {
+            self.businesses = businesses.items
+          } else {
+            self.businesses.append(contentsOf: businesses.items)
+          }
           
         case .failure(let error):
           self.view?.presentAlert(title: "Networking Error", message: error.localizedDescription)
@@ -84,6 +95,10 @@ extension StoreListPresenter: StoreListPresenterType {
     LocationService.shared.authorize()
     LocationService.shared.requestLocation()
     LocationService.shared.delegate = self
+  }
+  
+  func loadNextData() {
+    self.requestStoreList()
   }
   
   // TableView
@@ -111,7 +126,7 @@ extension StoreListPresenter: StoreListPresenterType {
 extension StoreListPresenter: LocationServiceDelegate {
   func getLocation(currentLocation: CLLocation) {
     self.currentLocation = currentLocation
-    self.requestStoreList()
+    self.requestStoreList(isRefresh: true)
   }
 
   func getLocationDidFailWithError(error: Error) {
