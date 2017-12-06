@@ -47,11 +47,11 @@
             </objects>
             <point key="canvasLocation" x="-163.19999999999999" y="132.23388305847078"/>
         </scene>
-        <!--Item-->
+        <!--Restaurant-->
         <scene sceneID="dSU-Of-j12">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OAb-ye-4CY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="NlD-XL-2Aw"/>
+                <navigationController title="Restaurant" automaticallyAdjustsScrollViewInsets="NO" id="OAb-ye-4CY" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Restaurant" image="icon-restaurant" id="NlD-XL-2Aw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="obV-4H-cf9">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -66,11 +66,11 @@
             </objects>
             <point key="canvasLocation" x="561" y="132"/>
         </scene>
-        <!--Item-->
+        <!--Grocery Store-->
         <scene sceneID="pIc-rh-tpA">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="W9F-xL-5zC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Shd-ow-fHC"/>
+                <navigationController title="Grocery Store" automaticallyAdjustsScrollViewInsets="NO" id="W9F-xL-5zC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="1" title="Grocery Store" image="icon-grocery" id="Shd-ow-fHC"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ey2-m9-dt0">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -86,4 +86,8 @@
             <point key="canvasLocation" x="-164" y="878"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon-grocery" width="30" height="30"/>
+        <image name="icon-restaurant" width="30" height="30"/>
+    </resources>
 </document>
