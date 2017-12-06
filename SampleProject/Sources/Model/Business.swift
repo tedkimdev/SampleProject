@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CoreLocation
 
 
 // MARK: Business
@@ -18,7 +17,7 @@ struct Business: Decodable {
   let name: String
   let rating: Float
   let reviewCount: Int
-  let location: CLLocation
+  let location: String
   let displayPhone: String
   let imageURL: String
   let isClosed: Bool
@@ -28,7 +27,7 @@ struct Business: Decodable {
     case name = "name"
     case rating = "rating"
     case reviewCount = "review_count"
-    case location = "coordinates"
+    case location = "location"
     case displayPhone = "display_phone"
     case imageURL = "image_url"
     case isClosed = "is_closed"
@@ -47,7 +46,7 @@ extension Business {
     let reviewCount = try container.decode(Int.self, forKey: .reviewCount)
     
     let businessLocation = try container.decode(BusinessLocation.self, forKey: .location)
-    let location = CLLocation(latitude: businessLocation.latitude, longitude: businessLocation.longitude)
+    let location = businessLocation.address.reduce("") { $0 + " " + $1 }.dropFirst()
     
     let displayPhone = try container.decode(String.self, forKey: .displayPhone)
     let imageURL = try container.decode(String.self, forKey: .imageURL)
@@ -57,7 +56,7 @@ extension Business {
               name: name,
               rating: rating,
               reviewCount: reviewCount,
-              location: location,
+              location: String(location),
               displayPhone: displayPhone,
               imageURL: imageURL,
               isClosed: isClosed)
@@ -81,11 +80,9 @@ struct Businesses: Decodable {
 // MARK: Location
 
 struct BusinessLocation: Decodable {
-  let latitude: CLLocationDegrees
-  let longitude: CLLocationDegrees
+  let address: [String]
   
   enum CodingKeys: String, CodingKey {
-    case latitude = "latitude"
-    case longitude = "longitude"
+    case address = "display_address"
   }
 }
