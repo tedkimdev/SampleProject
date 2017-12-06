@@ -8,11 +8,24 @@
 
 import UIKit
 
+
 protocol StoreDetailCellType {
   func configure(model: Business)
 }
 
+
+protocol StoreDetailCellDelegate: class {
+  func showReservationPage(by urlString: String?)
+}
+
+
 final class StoreDetailCell: UICollectionViewCell, StoreDetailCellType {
+  
+  // MARK: Properties
+  
+  private var reservationURL: String?
+  weak var delegate: StoreDetailCellDelegate?
+  
   
   // MARK: UI
   
@@ -52,7 +65,7 @@ final class StoreDetailCell: UICollectionViewCell, StoreDetailCellType {
     if !model.imageURL.isEmpty {
       self.imageView.kf.setImage(with: URL(string: model.imageURL))
     }
-    
+    self.reservationURL = "https://www.yelp.com/reservations/\(model.id)"
     self.locatinLabel.text = model.location
     self.phoneLabel.text = model.displayPhone
     self.starRatingView.rating = model.rating
@@ -69,6 +82,13 @@ final class StoreDetailCell: UICollectionViewCell, StoreDetailCellType {
     }
     
     self.layoutIfNeeded()
+  }
+  
+  
+  // MARK: Action
+  
+  @IBAction func reservationButtonDidTap(_ sender: Any) {
+    self.delegate?.showReservationPage(by: self.reservationURL)
   }
   
 }

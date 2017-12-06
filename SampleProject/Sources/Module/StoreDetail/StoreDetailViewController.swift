@@ -135,7 +135,7 @@ extension StoreDetailViewController: UICollectionViewDataSource {
 
 extension StoreDetailViewController: StoreDetailCellDelegate {
   
-  func goToReservation(by urlString: String?) {
+  func showReservationPage(by urlString: String?) {
     guard let urlString = urlString else { return }
     let safariViewController = SFSafariViewController(url: URL(string: urlString)!)
     self.present(safariViewController, animated: true, completion: nil)
