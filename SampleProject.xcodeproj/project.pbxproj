@@ -158,7 +158,7 @@
 				BDEC38A51FD6F9B700959063 /* Module */,
 				BDEC38A61FD6F9BF00959063 /* Model */,
 				BDEC38A71FD6F9C400959063 /* Service */,
-				BDEC38A81FD6F9D600959063 /* Extensions */,
+				BDEC38A81FD6F9D600959063 /* Helpers */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -201,12 +201,12 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		BDEC38A81FD6F9D600959063 /* Extensions */ = {
+		BDEC38A81FD6F9D600959063 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				BD472E271FD7C0460073376C /* StarRatingView.swift */,
 			);
-			path = Extensions;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		BDEC38A91FD6FA3200959063 /* Resources */ = {
