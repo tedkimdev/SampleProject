@@ -53,7 +53,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review Count : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="buC-aO-Dkf">
-                                                    <rect key="frame" x="88" y="384" width="200" height="20"/>
+                                                    <rect key="frame" x="88" y="382" width="200" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="WZ0-b6-G96"/>
                                                         <constraint firstAttribute="width" constant="200" id="w6v-Fp-wL3"/>
@@ -63,7 +63,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Is it open ? " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKk-eb-jns">
-                                                    <rect key="frame" x="88" y="416" width="200" height="20"/>
+                                                    <rect key="frame" x="88" y="414" width="200" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="4eB-B9-CUL"/>
                                                         <constraint firstAttribute="width" constant="200" id="CpD-lu-f0F"/>
@@ -73,7 +73,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bal-e4-a3v">
-                                                    <rect key="frame" x="77" y="476" width="220" height="30"/>
+                                                    <rect key="frame" x="77" y="474" width="220" height="30"/>
                                                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="3pC-4s-LpR"/>
@@ -95,7 +95,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-comment" translatesAutoresizingMaskIntoConstraints="NO" id="C1I-b0-OVL">
-                                                    <rect key="frame" x="50" y="384" width="20" height="20"/>
+                                                    <rect key="frame" x="50" y="382" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="0x1-zs-gXD"/>
                                                         <constraint firstAttribute="width" constant="20" id="zb4-YX-MhS"/>
@@ -118,14 +118,15 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="i1U-Wa-xyY" customClass="StarRatingView" customModule="SampleProject" customModuleProvider="target">
-                                                    <rect key="frame" x="91" y="340" width="192" height="32"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="i1U-Wa-xyY" customClass="StarRatingView" customModule="SampleProject" customModuleProvider="target">
+                                                    <rect key="frame" x="100" y="340" width="174" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="32" id="dtW-no-E1U"/>
+                                                        <constraint firstAttribute="width" constant="174" id="JlO-Vb-MZy"/>
+                                                        <constraint firstAttribute="height" constant="30" id="dtW-no-E1U"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="size" keyPath="starSize">
-                                                            <size key="value" width="32" height="32"/>
+                                                            <size key="value" width="30" height="30"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="starCount">
                                                             <integer key="value" value="5"/>
