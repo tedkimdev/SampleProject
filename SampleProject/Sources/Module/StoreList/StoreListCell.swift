@@ -9,10 +9,19 @@
 import UIKit
 
 protocol StoreListCellType {
-  func configure()
+  func configure(viewModel: StoreListCellViewModel)
 }
 
 final class StoreListCell: UITableViewCell, StoreListCellType {
+  
+  // MARK: UI
+  
+  @IBOutlet weak var photoView: UIImageView!
+  @IBOutlet weak var nameLabel: UILabel!
+  @IBOutlet weak var locationLabel: UILabel!
+  @IBOutlet weak var phoneLabel: UILabel!
+  
+  @IBOutlet weak var locationHeight: NSLayoutConstraint!
   
   // MARK: Initializing
   
@@ -25,9 +34,29 @@ final class StoreListCell: UITableViewCell, StoreListCellType {
   }
   
   
+  // MARK: Layout
+  
+  override func layoutIfNeeded() {
+    super.layoutIfNeeded()
+    
+    self.photoView.contentMode = .scaleAspectFill
+    self.photoView.layer.cornerRadius = self.photoView.frame.width / 2
+    self.photoView.layer.masksToBounds = true
+  }
+  
+  
   // MARK: Configuring
   
-  func configure() {
-    self.backgroundColor = .green
+  func configure(viewModel: StoreListCellViewModel) {
+    if !viewModel.imageURL.isEmpty {
+      self.photoView.kf.setImage(with: URL(string: viewModel.imageURL))
+    }
+    
+    self.nameLabel?.text = viewModel.name
+    self.locationLabel?.text = viewModel.location
+    self.phoneLabel?.text = viewModel.displayPhone
+    
+    self.layoutIfNeeded()
   }
+  
 }

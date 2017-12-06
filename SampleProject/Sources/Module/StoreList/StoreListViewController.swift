@@ -151,7 +151,7 @@ extension StoreListViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "StoreListCell", for: indexPath) as! StoreListCell
     
-    self.presenter.configureCell(cell)
+    self.presenter.configureCell(cell, at: indexPath)
     
     return cell
   }

@@ -20,7 +20,7 @@ protocol StoreListPresenterType: class, PresenterType {
   // TableView
   func didSelectTableViewRowAt(indexPath: IndexPath)
   func numberOfRows(in section: Int) -> Int
-  func configureCell(_ cell: StoreListCellType)
+  func configureCell(_ cell: StoreListCellType, at indexPath: IndexPath)
 }
 
 
@@ -93,12 +93,14 @@ extension StoreListPresenter: StoreListPresenterType {
   }
   
   func numberOfRows(in section: Int) -> Int {
-    return 5
+    return self.businesses.count
   }
   
-  func configureCell(_ cell: StoreListCellType) {
-    cell.configure()
+  func configureCell(_ cell: StoreListCellType, at indexPath: IndexPath) {
+    let viewModel = StoreListCellViewModel(model: self.businesses[indexPath.row])
+    cell.configure(viewModel: viewModel)
   }
+  
 }
 
 
