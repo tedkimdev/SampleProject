@@ -21,7 +21,7 @@ protocol StoreListViewType: ViewType {
   
   // Loading
   func startLoading()
-  func stopLoading()
+  func stopLoading(shouldReload: Bool)
 }
 
 
@@ -141,9 +141,8 @@ extension StoreListViewController: StoreListViewType {
     }
     alertController.addAction(openAction)
     
-    present(alertController, animated: true) { [weak self] in
-      guard let `self` = self else { return }
-      self.stopLoading()
+    present(alertController, animated: true) {
+      self.stopLoading(shouldReload: true)
     }
   }
   
@@ -161,11 +160,14 @@ extension StoreListViewController: StoreListViewType {
     indicatorView.startAnimating()
   }
   
-  func stopLoading() {
+  func stopLoading(shouldReload: Bool) {
     isLoading = false
     indicatorView.stopAnimating()
     tableView.refreshControl?.endRefreshing()
-    tableView.reloadData()
+    
+    if shouldReload {
+      tableView.reloadData()
+    }
   }
   
 }

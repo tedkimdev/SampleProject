@@ -81,9 +81,13 @@ final class StoreListPresenter {
   }
   
   private func requestStoreList(isRefresh: Bool = false) {
-    guard let location = currentLocation else { return }
+    guard let location = currentLocation,
+      !isRefresh && businesses.count < SortType.distance.total || isRefresh else {
+        view?.stopLoading(shouldReload: false)
+        return
+      }
     
-    if !isRefresh {
+    if businesses.isEmpty {
       view?.startLoading()
     }
     
@@ -93,19 +97,22 @@ final class StoreListPresenter {
       offset: isRefresh ? 0 : businesses.count
     ) { [weak self] result in
       guard let `self` = self else { return }
+      
       DispatchQueue.main.async {
         switch result {
         case .success(let businesses):
-          if self.businesses.count == 0 {
+          if isRefresh {
             self.businesses = businesses.items
           } else {
             self.businesses.append(contentsOf: businesses.items)
           }
+          self.view?.stopLoading(shouldReload: true)
           
         case .failure(let error):
           self.view?.presentAlert(title: "Networking Error", message: error.localizedDescription)
+          self.view?.stopLoading(shouldReload: false)
         }
-        self.view?.stopLoading()
+        
       }
     }
   }

@@ -100,6 +100,7 @@ extension StoreService : StoreServiceType {
       "longitude": location.coordinate.longitude,
       "sort_by": SortType.distance,
       "offset": offset,
+      "limit": 20,
     ]
     
     Alamofire.request(StoreService.baseURL, method: .get, parameters: parameters, headers: headers)
