@@ -37,7 +37,7 @@ final class StoreDetailPresenter {
   }
   
   func onViewDidLoad() {
-    view?.setTitle(title: self.business?.name ?? "")
+    view?.setTitle(title: business?.name ?? "")
   }
   
 }

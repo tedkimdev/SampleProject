@@ -47,7 +47,7 @@ final class StoreDetailCell: UICollectionViewCell, StoreDetailCellType {
     super.layoutIfNeeded()
     
     imageView.contentMode = .scaleAspectFill
-    imageView.layer.cornerRadius = self.imageView.frame.width / 2
+    imageView.layer.cornerRadius = imageView.frame.width / 2
     imageView.layer.masksToBounds = true
   }
   
@@ -66,12 +66,12 @@ final class StoreDetailCell: UICollectionViewCell, StoreDetailCellType {
     let formatter = NumberFormatter()
     formatter.numberStyle = .decimal
     let numberString = formatter.string(from: NSNumber(integerLiteral: model.reviewCount))!
-    reviewCountLabel.text = self.reviewCountLabel.text! + "\(numberString)"
+    reviewCountLabel.text = reviewCountLabel.text! + "\(numberString)"
     
     if model.isClosed {
-      isOpenLabel.text = self.isOpenLabel.text! + "No"
+      isOpenLabel.text = isOpenLabel.text! + "No"
     } else {
-      isOpenLabel.text = self.isOpenLabel.text! + "Yes"
+      isOpenLabel.text = isOpenLabel.text! + "Yes"
     }
     
     layoutIfNeeded()
@@ -81,7 +81,7 @@ final class StoreDetailCell: UICollectionViewCell, StoreDetailCellType {
   // MARK: Action
   
   @IBAction func reservationButtonDidTap(_ sender: Any) {
-    delegate?.showReservationPage(by: self.reservationURL)
+    delegate?.showReservationPage(by: reservationURL)
   }
   
 }

@@ -165,8 +165,10 @@ extension StoreListPresenter: LocationServiceDelegate {
 
   func getLocationDidFailWithError(error: Error) {
     let status = CLLocationManager.authorizationStatus()
+    
     DispatchQueue.main.async { [weak self] in
       guard let `self` = self else { return }
+      
       if status == .denied || status == .restricted {
         self.view?.openSettingsAlert(
           title: "Location Access Denied",
@@ -179,6 +181,7 @@ extension StoreListPresenter: LocationServiceDelegate {
         )
       }
     }
+    
   }
   
 }

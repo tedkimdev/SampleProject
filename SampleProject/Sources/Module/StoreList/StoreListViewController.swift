@@ -73,11 +73,11 @@ final class StoreListViewController: BaseViewController {
     
     tableView.refreshControl = UIRefreshControl()
     
-    indicatorView.layer.cornerRadius = self.indicatorView.bounds.width / 4
+    indicatorView.layer.cornerRadius = indicatorView.bounds.width / 4
     indicatorView.backgroundColor = .black
-    indicatorView.center = self.view.center
+    indicatorView.center = view.center
     
-    view.addSubview(self.indicatorView)
+    view.addSubview(indicatorView)
   }
   
   override func setupBinding() {
@@ -117,7 +117,8 @@ extension StoreListViewController: StoreListViewType {
     let action = UIAlertAction(title: "OK", style: .default, handler: nil)
     alertController.addAction(action)
     
-    let reloadAction = UIAlertAction(title: "Reload", style: .default) { _ in
+    let reloadAction = UIAlertAction(title: "Reload", style: .default) { [weak self] _ in
+      guard let `self` = self else { return }
       self.didPullToRefresh()
     }
     alertController.addAction(reloadAction)
@@ -141,7 +142,8 @@ extension StoreListViewController: StoreListViewType {
     }
     alertController.addAction(openAction)
     
-    present(alertController, animated: true) {
+    present(alertController, animated: true) { [weak self] in
+      guard let `self` = self else { return }
       self.stopLoading(shouldReload: true)
     }
   }
