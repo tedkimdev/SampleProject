@@ -48,13 +48,11 @@ final class LocationService: NSObject {
   }
   
   private func updateLocation(currentLocation: CLLocation){
-    guard let delegate = self.delegate else { return }
-    delegate.getLocation(currentLocation: currentLocation)
+    self.delegate?.getLocation(currentLocation: currentLocation)
   }
   
   private func updateLocationDidFailWithError(error: Error) {
-    guard let delegate = self.delegate else { return }
-    delegate.getLocationDidFailWithError(error: error)
+    self.delegate?.getLocationDidFailWithError(error: error)
   }
   
 }

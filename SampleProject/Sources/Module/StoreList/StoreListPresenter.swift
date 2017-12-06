@@ -50,6 +50,11 @@ final class StoreListPresenter {
     guard let title = self.view?.getViewTitle() else { return }
     self.storeType = StoreType(rawValue: title) ?? StoreType.none
     
+    let status = CLLocationManager.authorizationStatus()
+    if status == .denied || status == .restricted {
+      self.view?.presentAlert(title: "Location Services Disabled", message: "Please enable Location Services in Settings.")
+    }
+    
     self.reloadData()
   }
   
@@ -124,6 +129,7 @@ extension StoreListPresenter: StoreListPresenterType {
 // MARK: - LocationServiceDelegate
 
 extension StoreListPresenter: LocationServiceDelegate {
+  
   func getLocation(currentLocation: CLLocation) {
     self.currentLocation = currentLocation
     self.requestStoreList(isRefresh: true)
@@ -132,5 +138,6 @@ extension StoreListPresenter: LocationServiceDelegate {
   func getLocationDidFailWithError(error: Error) {
     self.view?.presentAlert(title: "Location Error", message: error.localizedDescription)
   }
+  
 }
 
